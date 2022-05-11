@@ -86,12 +86,12 @@ export const VideosUser = (props: RouteComponentProps<{ url: string }>) => {
                   <td className="text-end">
                     <div className="btn-group flex-btn-group-container">
                     
-                      {/* <Button tag={Link} to={`/videos/${videos.id}/edit`} color="primary" size="sm" data-cy="entityEditButton">
+                      <Button tag={Link} to={`/videos/${videos.id}/edit`} color="primary" size="sm" data-cy="entityEditButton">
                         <FontAwesomeIcon icon="pencil-alt" /> <span className="d-none d-md-inline">Edit</span>
                       </Button>
                       <Button tag={Link} to={`/videos/${videos.id}/delete`} color="danger" size="sm" data-cy="entityDeleteButton">
                         <FontAwesomeIcon icon="trash" /> <span className="d-none d-md-inline">Delete</span>
-                      </Button> */}
+                      </Button>
                     </div>
                   </td>
                 </tr>

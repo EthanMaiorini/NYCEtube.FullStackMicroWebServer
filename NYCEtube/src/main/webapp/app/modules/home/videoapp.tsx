@@ -9,6 +9,7 @@ import Videos from 'url'
         return (
             <div>
            <VideoPlayer
+                    preload= "metadata"
                     controls={true}
                     src= {vid.url}
                     poster={vid.poster}

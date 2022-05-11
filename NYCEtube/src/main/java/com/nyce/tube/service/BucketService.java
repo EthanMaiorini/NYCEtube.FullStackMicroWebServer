@@ -32,7 +32,10 @@ import software.amazon.awssdk.services.s3.S3ClientBuilder;
 import software.amazon.awssdk.services.s3.model.HeadObjectRequest;
 import software.amazon.awssdk.services.s3.model.HeadObjectResponse;
 import software.amazon.awssdk.services.s3.model.PutObjectRequest;
+
+import software.amazon.awssdk.core.waiters.WaiterResponse;
 import software.amazon.awssdk.services.s3.waiters.S3Waiter;
+
 
 import java.io.ByteArrayInputStream;
 import java.net.URL;
@@ -86,11 +89,35 @@ public class BucketService {
         }
 
         
+
     public void uploadFile(String fileName, byte[] video) {
-
-
-        String bucketName = "zcw-cohort8zero";
-        String keyName = "videoapp/"+fileName; // Also the name path from which you want save on S3 without Extension it will be same source file
+    // public static void UploadFileExample3(String[] args) {
+    //             String bucketName = "zcw-cohort8zero";
+    //             String folderName = "videoapp";
+                 
+    //             String fileName = "Java Logo.png";
+    //             String filePath = "D:/Images/" + fileName;
+    //             String key = folderName + "/" + fileName;
+                 
+    //             S3Client client = S3Client.builder().build();
+                 
+    //             PutObjectRequest request = PutObjectRequest.builder()
+    //                             .bucket(bucketName)
+    //                             .key(key)
+    //                             .acl("public-read")
+    //                             .build();
+                 
+    //             client.putObject(request, RequestBody.fromFile(new File(filePath)));
+                 
+    //             S3Waiter waiter = client.waiter();
+    //             HeadObjectRequest requestWait = HeadObjectRequest.builder().bucket(bucketName).key(key).build();
+                 
+    //             WaiterResponse<HeadObjectResponse> waiterResponse = waiter.waitUntilObjectExists(requestWait);
+                 
+    //             waiterResponse.matched().response().ifPresent(System.out::println);
+                 
+    //             System.out.println("File " + fileName + " was uploaded.");     
+    //         }
     
         
             }

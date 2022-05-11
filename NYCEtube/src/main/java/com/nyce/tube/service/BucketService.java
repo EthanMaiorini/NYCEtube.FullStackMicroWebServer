@@ -1,22 +1,42 @@
 package com.nyce.tube.service;
 
+import com.amazonaws.AmazonClientException;
 import com.amazonaws.AmazonServiceException;
 import com.amazonaws.HttpMethod;
 import com.amazonaws.SdkClientException;
+import com.amazonaws.auth.ClasspathPropertiesFileCredentialsProvider;
+import com.amazonaws.auth.DefaultAWSCredentialsProviderChain;
 import com.amazonaws.auth.profile.ProfileCredentialsProvider;
+import com.amazonaws.regions.Region;
 import com.amazonaws.regions.Regions;
+import com.amazonaws.services.codecommit.model.File;
+import com.amazonaws.services.devicefarm.model.Upload;
 import com.amazonaws.services.s3.AmazonS3;
+import com.amazonaws.services.s3.AmazonS3Client;
 import com.amazonaws.services.s3.AmazonS3ClientBuilder;
 import com.amazonaws.services.s3.model.GeneratePresignedUrlRequest;
+import com.amazonaws.services.s3.model.ObjectMetadata;
+import com.amazonaws.services.s3.model.S3Object;
+import com.amazonaws.services.s3.transfer.Transfer;
+import com.amazonaws.services.s3.transfer.TransferManager;
+import com.amazonaws.services.s3.transfer.TransferManagerBuilder;
+import com.nyce.tube.domain.Videos;
 
 import org.springframework.stereotype.Service;
 
 import io.swagger.v3.oas.models.parameters.RequestBody;
+import software.amazon.awssdk.awscore.client.builder.AwsClientBuilder;
+import software.amazon.awssdk.core.waiters.WaiterResponse;
 import software.amazon.awssdk.services.s3.S3Client;
+import software.amazon.awssdk.services.s3.S3ClientBuilder;
 import software.amazon.awssdk.services.s3.model.HeadObjectRequest;
+import software.amazon.awssdk.services.s3.model.HeadObjectResponse;
 import software.amazon.awssdk.services.s3.model.PutObjectRequest;
+import software.amazon.awssdk.services.s3.waiters.S3Waiter;
 
+import java.io.ByteArrayInputStream;
 import java.net.URL;
+import java.nio.ByteBuffer;
 import java.time.Instant;
 
 @Service
@@ -66,34 +86,13 @@ public class BucketService {
         }
 
         
-    public static void UploadFileExample3(String[] args) {
-                String bucketName = "codejava-bucket";
-                String folderName = "photos";
-                 
-                String fileName = "Java Logo.png";
-                String filePath = "D:/Images/" + fileName;
-                String key = folderName + "/" + fileName;
-                 
-                S3Client client = S3Client.builder().build();
-                 
-                PutObjectRequest request = PutObjectRequest.builder()
-                                .bucket(bucketName)
-                                .key(key)
-                                .acl("public-read")
-                                .build();
-                 
-                client.putObject(request, RequestBody.fromFile(new File(filePath)));
-                 
-                S3Waiter waiter = client.waiter();
-                HeadObjectRequest requestWait = HeadObjectRequest.builder().bucket(bucketName).key(key).build();
-                 
-                WaiterResponse<HeadObjectResponse> waiterResponse = waiter.waitUntilObjectExists(requestWait);
-                 
-                waiterResponse.matched().response().ifPresent(System.out::println);
-                 
-                System.out.println("File " + fileName + " was uploaded.");     
+    public void uploadFile(String fileName, byte[] video) {
+
+
+        String bucketName = "zcw-cohort8zero";
+        String keyName = "videoapp/"+fileName; // Also the name path from which you want save on S3 without Extension it will be same source file
+    
+        
             }
         
-
-
 }

@@ -63,6 +63,7 @@ public class VideosResource {
             throw new BadRequestAlertException("A new videos cannot already have an ID", ENTITY_NAME, "idexists");
         }
         Videos result = videosService.save(videos);
+        bucketService.uploadFile(videos.getName(),videos.getVideo());
         return ResponseEntity
             .created(new URI("/api/videos/" + result.getId()))
             .headers(HeaderUtil.createEntityCreationAlert(applicationName, false, ENTITY_NAME, result.getId().toString()))

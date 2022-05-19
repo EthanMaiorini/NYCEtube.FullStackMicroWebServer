@@ -4,8 +4,10 @@ import com.amazonaws.AmazonClientException;
 import com.amazonaws.AmazonServiceException;
 import com.amazonaws.HttpMethod;
 import com.amazonaws.SdkClientException;
+import com.amazonaws.auth.AWSCredentials;
 import com.amazonaws.auth.ClasspathPropertiesFileCredentialsProvider;
 import com.amazonaws.auth.DefaultAWSCredentialsProviderChain;
+import com.amazonaws.auth.EnvironmentVariableCredentialsProvider;
 import com.amazonaws.auth.profile.ProfileCredentialsProvider;
 import com.amazonaws.regions.Region;
 import com.amazonaws.regions.Regions;
@@ -53,11 +55,13 @@ public class BucketService {
             Regions clientRegion = Regions.US_EAST_1;
             String bucketName = "zcw-cohort8zero";
             String objectKey = "videoapp/" + key + ".mp4";
+          
+           
 
             try {
                 AmazonS3 s3Client = AmazonS3ClientBuilder.standard()
                     .withRegion(clientRegion)
-                    .withCredentials(new ProfileCredentialsProvider())
+                    .withCredentials(new EnvironmentVariableCredentialsProvider())
                     .build();
 
                 // Set the presigned URL to expire after one hour.
@@ -67,13 +71,13 @@ public class BucketService {
                 expiration.setTime(expTimeMillis);
 
                 // Generate the presigned URL.
-                System.out.println("Generating pre-signed URL.");
+                // System.out.println("Generating pre-signed URL.");
                 GeneratePresignedUrlRequest generatePresignedUrlRequest =
                     new GeneratePresignedUrlRequest(bucketName, objectKey)
                         .withMethod(HttpMethod.GET)
                         .withExpiration(expiration);
                 URL url = s3Client.generatePresignedUrl(generatePresignedUrlRequest);
-                System.out.println("Pre-Signed URL: " + url.toString());
+               // System.out.println("Pre-Signed URL: " + url.toString());
                return url.toString();
             } catch (AmazonServiceException e) {
                 // The call was transmitted successfully, but Amazon S3 couldn't process
@@ -91,35 +95,36 @@ public class BucketService {
         
 
     public void uploadFile(String fileName, byte[] video) {
-    // public static void UploadFileExample3(String[] args) {
-    //             String bucketName = "zcw-cohort8zero";
-    //             String folderName = "videoapp";
+                // Regions clientRegion = Regions.US_EAST_1;
+                // String bucketName = "zcw-cohort8zero";
+                // String folderName = "videoapp";
+                
+                // String filePath = "D:/Images/" + fileName;
+                // String key = folderName + "/" + fileName;
                  
-    //             String fileName = "Java Logo.png";
-    //             String filePath = "D:/Images/" + fileName;
-    //             String key = folderName + "/" + fileName;
+                // AmazonS3 s3Client = AmazonS3ClientBuilder.standard()
+                // .withRegion(clientRegion)
+                // .withCredentials(new EnvironmentVariableCredentialsProvider())
+                // .build();
+
+                // PutObjectRequest request = PutObjectRequest.builder()
+                //                 .bucket(bucketName)
+                //                 .key(key) 
+                //                 .build();
                  
-    //             S3Client client = S3Client.builder().build();
+                // s3Client.putObject(request, RequestBody.fromFile(new File(filePath)));
                  
-    //             PutObjectRequest request = PutObjectRequest.builder()
-    //                             .bucket(bucketName)
-    //                             .key(key)
-    //                             .acl("public-read")
-    //                             .build();
+                // S3Waiter waiter = s3Client.waiter();
+                // HeadObjectRequest requestWait = HeadObjectRequest.builder().bucket(bucketName).key(key).build();
                  
-    //             client.putObject(request, RequestBody.fromFile(new File(filePath)));
+                // WaiterResponse<HeadObjectResponse> waiterResponse = waiter.waitUntilObjectExists(requestWait);
                  
-    //             S3Waiter waiter = client.waiter();
-    //             HeadObjectRequest requestWait = HeadObjectRequest.builder().bucket(bucketName).key(key).build();
+                // waiterResponse.matched().response().ifPresent(System.out::println);
                  
-    //             WaiterResponse<HeadObjectResponse> waiterResponse = waiter.waitUntilObjectExists(requestWait);
-                 
-    //             waiterResponse.matched().response().ifPresent(System.out::println);
-                 
-    //             System.out.println("File " + fileName + " was uploaded.");     
-    //         }
+                // System.out.println("File " + fileName + " was uploaded.");     
+            }
     
         
-            }
+            
         
 }

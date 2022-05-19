@@ -3,8 +3,8 @@
 // export const GetVideo = () => {
 // const account = useAppSelector(state => state.authentication.account);
 
-const AWS = require('aws-sdk');
-const config = require('./tsconfig.json');
+ const AWS = require('aws-sdk');
+ const config = require('./tsconfig.json');
 
 const s3 = new AWS.S3();
 
